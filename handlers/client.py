@@ -1,10 +1,12 @@
 from aiogram import types, Dispatcher
 from create_bot import dp, bot
+from keyboards import kb_client
+from aiogram.types import ReplyKeyboardRemove
 
 
 async def command_start(message: types.Message):
     try:
-        await bot.send_message(message.from_user.id, 'Приятного аппетита!')
+        await bot.send_message(message.from_user.id, 'Приятного аппетита!', reply_markup=kb_client)
         await message.delete()
     except:
         await message.reply('Общение с ботом, через лс, напишите ему.')
@@ -15,7 +17,7 @@ async def schedule(message: types.Message):
 
 
 async def geolocation(message: types.Message):
-    await bot.send_message(message.from_user.id, 'ул. Сетевая 24.7')
+    await bot.send_message(message.from_user.id, 'ул. Сетевая 24.7', reply_markup=ReplyKeyboardRemove())
 
 
 def register_handlers_client():
