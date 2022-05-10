@@ -3,6 +3,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types, Dispatcher
 from create_bot import dp
 from aiogram.dispatcher.filters import Text
+from generators.quote import Generate
 
 
 class FSMAdmin(StatesGroup):
@@ -60,6 +61,12 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     await message.reply('OK')
 
 
+# Генерация цитаты
+async def quote_generate(message: types.Message):
+    await message.delete()
+    await message.answer(Generate.quote())
+
+
 # Регистрируем хендлеры
 def register_handlers_admin():
     dp.register_message_handler(cm_start, commands=['Загрузить'], state=None)
@@ -69,3 +76,4 @@ def register_handlers_admin():
     dp.register_message_handler(load_price, state=FSMAdmin.price)
     dp.register_message_handler(cancel_handler, state='*', commands='отмена')
     dp.register_message_handler(cancel_handler, Text(equals='отмена', ignore_case=True), state='*')
+    dp.register_message_handler(quote_generate, Text(equals='💬 Генератор цитат', ignore_case=True), state='*')
