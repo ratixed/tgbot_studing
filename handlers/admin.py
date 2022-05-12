@@ -67,7 +67,7 @@ async def quote_generate(message: types.Message):
     await message.answer(Generate.quote())
 
 
-# Изминение
+# Регистрируем хендлеры 2
 def register_handlers_admin():
     dp.register_message_handler(cm_start, commands=['Загрузить'], state=None)
     dp.register_message_handler(load_photo, content_types=['photo'], state=FSMAdmin.photo)
