@@ -61,7 +61,7 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     await message.reply('OK')
 
 
-# Генерация цитаты 2
+# Генерация цитаты
 async def quote_generate(message: types.Message):
     await message.delete()
     await message.answer(Generate.quote())
